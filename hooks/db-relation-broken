@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -ex
+
+juju-log "Removing MySQL credentials from cache"
+
+rm -f .mysql

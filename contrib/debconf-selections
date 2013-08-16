@@ -1,0 +1,83 @@
+mysql-server-5.5	mysql-server/root_password_again	password	
+mysql-server-5.5	mysql-server/root_password	password	
+# MySQL application password for zabbix-server-mysql:
+zabbix-server-mysql	zabbix-server-mysql/mysql/app-pass	password
+# MySQL application password for zabbix-frontend-php:
+zabbix-frontend-php	zabbix-frontend-php/mysql/app-pass	password
+zabbix-server-mysql	zabbix-server-mysql/password-confirm	password
+zabbix-server-mysql	zabbix-server-mysql/mysql/admin-pass	password
+# Host running the  server for zabbix-frontend-php:
+zabbix-frontend-php	zabbix-frontend-php/remote/newhost	string
+zabbix-frontend-php	zabbix-frontend-php/remote/port	string
+# Host name of the MySQL database server for zabbix-server-mysql:
+zabbix-server-mysql	zabbix-server-mysql/remote/host	select
+zabbix-server-mysql	zabbix-server-mysql/upgrade-error	select	abort
+# MySQL database name for zabbix-server-mysql:
+zabbix-server-mysql	zabbix-server-mysql/db/dbname	string	zabbix
+# Deconfigure database for zabbix-server-mysql with dbconfig-common?
+zabbix-server-mysql	zabbix-server-mysql/dbconfig-remove	boolean
+zabbix-frontend-php	zabbix-frontend-php/mysql/admin-user	string	root
+# Host name of the  database server for zabbix-frontend-php:
+zabbix-frontend-php	zabbix-frontend-php/remote/host	select
+# MySQL username for zabbix-server-mysql:
+zabbix-server-mysql	zabbix-server-mysql/db/app-user	string	zabbix
+zabbix-frontend-php	zabbix-frontend-php/pgsql/admin-user	string	postgres
+# Database type to be used by zabbix-server-mysql:
+zabbix-server-mysql	zabbix-server-mysql/database-type	select	mysql
+zabbix-server-mysql	zabbix-server-mysql/internal/skip-preseed	boolean	true
+zabbix-server-mysql	zabbix-server-mysql/remove-error	select	abort
+# Reinstall database for zabbix-server-mysql?
+zabbix-server-mysql	zabbix-server-mysql/dbconfig-reinstall	boolean	false
+# Database type to be used by zabbix-frontend-php:
+zabbix-frontend-php	zabbix-frontend-php/database-type	select	mysql
+zabbix-server-mysql	zabbix-server-mysql/server	note
+# Do you want to back up the database for zabbix-server-mysql before upgrading?
+zabbix-server-mysql	zabbix-server-mysql/upgrade-backup	boolean	true
+# Perform upgrade on database for zabbix-frontend-php with dbconfig-common?
+zabbix-frontend-php	zabbix-frontend-php/dbconfig-upgrade	boolean	true
+# Connection method for MySQL database of zabbix-frontend-php:
+zabbix-frontend-php	zabbix-frontend-php/mysql/method	select	unix socket
+zabbix-frontend-php	zabbix-frontend-php/configure-apache	boolean	true
+# Deconfigure database for zabbix-frontend-php with dbconfig-common?
+zabbix-frontend-php	zabbix-frontend-php/dbconfig-remove	boolean
+# Host running the MySQL server for zabbix-server-mysql:
+zabbix-server-mysql	zabbix-server-mysql/remote/newhost	string
+zabbix-frontend-php	zabbix-frontend-php/upgrade-error	select	abort
+zabbix-frontend-php	zabbix-frontend-php/pgsql/no-empty-passwords	error
+# Do you want to back up the database for zabbix-frontend-php before upgrading?
+zabbix-frontend-php	zabbix-frontend-php/upgrade-backup	boolean	true
+zabbix-server-mysql	zabbix-server-mysql/missing-db-package-error	select	abort
+zabbix-frontend-php	zabbix-frontend-php/restart-webserver	boolean	true
+# Do you want to purge the database for zabbix-server-mysql?
+zabbix-server-mysql	zabbix-server-mysql/purge	boolean	false
+#  storage directory for zabbix-frontend-php:
+zabbix-frontend-php	zabbix-frontend-php/db/basepath	string
+zabbix-server-mysql	zabbix-server-mysql/internal/reconfiguring	boolean	false
+zabbix-server-mysql	zabbix-server-mysql/mysql/admin-user	string	$DB_ADMIN
+zabbix-frontend-php	zabbix-frontend-php/pgsql/manualconf	note
+zabbix-frontend-php	zabbix-frontend-php/zabbix-server	string	127.0.0.1
+zabbix-frontend-php	zabbix-frontend-php/internal/reconfiguring	boolean	false
+#  username for zabbix-frontend-php:
+zabbix-frontend-php	zabbix-frontend-php/db/app-user	string	zabbix
+zabbix-frontend-php	zabbix-frontend-php/zabbix-server-port	string	10051
+zabbix-server-mysql	zabbix-server-mysql/install-error	select	abort
+# Configure database for zabbix-frontend-php with dbconfig-common?
+zabbix-frontend-php	zabbix-frontend-php/dbconfig-install	boolean	true
+zabbix-server-mysql	zabbix-server-mysql/passwords-do-not-match	error
+#  database name for zabbix-frontend-php:
+zabbix-frontend-php	zabbix-frontend-php/db/dbname	string	zabbix
+# Configure database for zabbix-server-mysql with dbconfig-common?
+zabbix-server-mysql	zabbix-server-mysql/dbconfig-install	boolean	false
+zabbix-frontend-php	zabbix-frontend-php/remove-error	select	abort
+zabbix-frontend-php	zabbix-frontend-php/pgsql/changeconf	boolean	false
+# Reinstall database for zabbix-frontend-php?
+zabbix-frontend-php	zabbix-frontend-php/dbconfig-reinstall	boolean	false
+# Do you want to purge the database for zabbix-frontend-php?
+zabbix-frontend-php	zabbix-frontend-php/purge	boolean	false
+zabbix-frontend-php	zabbix-frontend-php/pgsql/authmethod-admin	select	ident
+zabbix-frontend-php	zabbix-frontend-php/missing-db-package-error	select	abort
+# Connection method for MySQL database of zabbix-server-mysql:
+zabbix-server-mysql	zabbix-server-mysql/mysql/method	select	unix socket
+# Perform upgrade on database for zabbix-server-mysql with dbconfig-common?
+zabbix-server-mysql	zabbix-server-mysql/dbconfig-upgrade	boolean	true
+zabbix-server-mysql	zabbix-server-mysql/remote/port	string

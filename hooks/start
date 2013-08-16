@@ -1,0 +1,10 @@
+#!/bin/bash
+
+sed -ex
+
+if [ ! -f .mysql ]; then
+  juju-log "waiting for mysql db relation"
+  exit 0
+fi
+
+service zabbix-server start || service zabbix-server restart

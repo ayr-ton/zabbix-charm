@@ -1,0 +1,62 @@
+#!/bin/bash
+
+set -ex
+
+db_user=`relation-get user`
+db_pass=`relation-get password`
+db=`relation-get database`
+db_host=`relation-get private-address`
+
+if [ -z "$db" ]; then
+  juju-log "No credentials yet, waiting"
+  exit 0
+fi
+
+juju-log "Update zabbix and zabbix-frontend to use database information"
+
+cat > /etc/zabbix/dbconfig.php <<EOF
+<?php
+
+global \$DB;
+
+\$DB["TYPE"]      = "MYSQL";
+\$DB["SERVER"]    = "$db_host";
+\$DB["PORT"]      = "3306";
+\$DB["DATABASE"]  = "$db";
+\$DB["USER"]      = "$db_user";
+\$DB["PASSWORD"]  = "$db_pass";
+\$ZBX_SERVER      = "127.0.0.1";
+\$ZBX_SERVER_PORT = "10051";
+
+\$IMAGE_FORMAT_DEFAULT    = IMAGE_FORMAT_PNG;
+
+EOF
+
+zabbix_cfg="/etc/zabbix/zabbix_server.conf"
+
+juju-log "Update Zabbix server configuration"
+
+sed -i "s/^DBHost=.*/DBHost=$db_host/" $zabbix_cfg
+sed -i "s/^DBName=.*/DBName=$db/" $zabbix_cfg
+sed -i "s/^DBUser=.*/DBUser=$db_user/" $zabbix_cfg
+sed -i "s/^DBPassword=.*/DBPassword=$db_pass/" $zabbix_cfg
+sed -i "s/^DBName=.*/DBName=$db/" $zabbix_cfg
+
+if [ ! -f .mysql ]; then
+  juju-log "Installing zabbix"
+  cat /usr/share/dbconfig-common/data/zabbix-server-mysql/install/mysql \
+    | mysql -u$db_user -p$db_pass -h$db_host $db
+fi
+
+juju-log "Save database details for later use"
+
+cat > .mysql <<EOF
+db_host=$db_host
+db_user=$db_user
+db_pass=$db_pass
+db=$db
+EOF
+
+open-port 80
+
+hooks/start

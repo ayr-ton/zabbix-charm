@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -ex
+
+exit 1
+
+cat contrib/debconf-selections | debconf-set-selections
+
+apt-get install -y zabbix-server-mysql zabbix-frontend-php
