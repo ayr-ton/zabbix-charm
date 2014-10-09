@@ -7,4 +7,5 @@ if [ ! -f .mysql ]; then
   exit 0
 fi
 
-service zabbix-server start || service zabbix-server restart
+service zabbix-server start || service zabbix-server start
+service apache2 restart

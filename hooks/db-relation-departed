@@ -8,7 +8,5 @@ set -i "s/^DBHost=.*/DBHost=/" $zabbix_cfg
 set -i "s/^DBName=.*/DBName=/" $zabbix_cfg
 set -i "s/^DBUser=.*/DBUser=/" $zabbix_cfg
 set -i "s/^DBPassword=.*/DBPassword=/" $zabbix_cfg
-set -i "s/^DBName=.*/DBName=/" $zabbix_cfg
 
-rm -f /etc/zabbix/dbconfig.php
-
+rm -f /etc/zabbix/zabbix.conf.php

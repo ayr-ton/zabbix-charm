@@ -1,6 +1,6 @@
 name: zabbix
 summary: Zabbix server
-maintainer: Marco Ceppi <marcoceppi@ubuntu.com>
+maintainer: Ayrton Araujo <ayrton@ubuntu.com>
 description: |
   This is zabbix server with MySQL support
 categories:

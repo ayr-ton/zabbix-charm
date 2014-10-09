@@ -14,7 +14,7 @@ fi
 
 juju-log "Update zabbix and zabbix-frontend to use database information"
 
-cat > /etc/zabbix/dbconfig.php <<EOF
+cat > /etc/zabbix/zabbix.conf.php <<EOF
 <?php
 
 global \$DB;
@@ -29,6 +29,7 @@ global \$DB;
 \$ZBX_SERVER_PORT = "10051";
 
 \$IMAGE_FORMAT_DEFAULT    = IMAGE_FORMAT_PNG;
+?>
 
 EOF
 
@@ -36,16 +37,19 @@ zabbix_cfg="/etc/zabbix/zabbix_server.conf"
 
 juju-log "Update Zabbix server configuration"
 
-sed -i "s/^DBHost=.*/DBHost=$db_host/" $zabbix_cfg
+sed -i "/^# DBHost=.*/c\DBHost=$db_host" $zabbix_cfg
 sed -i "s/^DBName=.*/DBName=$db/" $zabbix_cfg
 sed -i "s/^DBUser=.*/DBUser=$db_user/" $zabbix_cfg
-sed -i "s/^DBPassword=.*/DBPassword=$db_pass/" $zabbix_cfg
-sed -i "s/^DBName=.*/DBName=$db/" $zabbix_cfg
+sed -i "/^# DBPassword=.*/c\DBPassword=$db_host" $zabbix_cfg
 
 if [ ! -f .mysql ]; then
   juju-log "Installing zabbix"
-  cat /usr/share/dbconfig-common/data/zabbix-server-mysql/install/mysql \
-    | mysql -u$db_user -p$db_pass -h$db_host $db
+  cat /usr/share/zabbix-server-mysql/schema.sql.gz \
+    | gunzip | mysql -u$db_user -p$db_pass -h$db_host $db
+  cat /usr/share/zabbix-server-mysql/images.sql.gz \
+    | gunzip | mysql -u$db_user -p$db_pass -h$db_host $db
+  cat /usr/share/zabbix-server-mysql/data.sql.gz \
+    | gunzip | mysql -u$db_user -p$db_pass -h$db_host $db
 fi
 
 juju-log "Save database details for later use"
@@ -58,5 +62,6 @@ db=$db
 EOF
 
 open-port 80
+open-port 10051
 
 hooks/start
