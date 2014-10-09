@@ -40,7 +40,7 @@ juju-log "Update Zabbix server configuration"
 sed -i "/^# DBHost=.*/c\DBHost=$db_host" $zabbix_cfg
 sed -i "s/^DBName=.*/DBName=$db/" $zabbix_cfg
 sed -i "s/^DBUser=.*/DBUser=$db_user/" $zabbix_cfg
-sed -i "/^# DBPassword=.*/c\DBPassword=$db_host" $zabbix_cfg
+sed -i "/^# DBPassword=.*/c\DBPassword=$db_pass" $zabbix_cfg
 
 if [ ! -f .mysql ]; then
   juju-log "Installing zabbix"
