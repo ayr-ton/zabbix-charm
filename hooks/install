@@ -4,7 +4,7 @@ set -ex
 
 cat contrib/debconf-selections | debconf-set-selections
 
-apt-get install -y zabbix-server-mysql zabbix-frontend-php
+apt-get install -y zabbix-server-mysql zabbix-frontend-php php5-mysql
 
 #Configure alias at Apache2
 a2enmod alias
